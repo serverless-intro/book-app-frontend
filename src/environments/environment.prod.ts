@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://localhost:3000',
+  backendUrl: 'https://e4ah4n77ve.execute-api.eu-central-1.amazonaws.com/',
 };

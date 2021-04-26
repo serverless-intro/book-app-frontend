@@ -67,6 +67,7 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - run:
