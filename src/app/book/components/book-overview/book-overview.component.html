@@ -1,0 +1,8 @@
+<input [formControl]="queryFormControl"
+       class="form-control form-control-lg"
+       placeholder="Type to filter books...">
+<ul>
+  <li *ngFor="let book of $books | async">
+        <ba-book-card [of]="book"></ba-book-card>
+  </li>
+</ul>

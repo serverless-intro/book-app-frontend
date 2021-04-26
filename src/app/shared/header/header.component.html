@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">BookApp</a>
+  <button class="navbar-toggler"
+          [class.collapsed]="collapsed"
+          type="button"
+          aria-controls="navbarSupportedContent"
+          [attr.aria-expanded]="!collapsed"
+          aria-label="Toggle navigation"
+          (click)="toggle()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [class.show]="!collapsed" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link"
+           routerLink="/books"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}">Books</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/books/new" routerLinkActive="active">Add a new book...</a>
+      </li>
+    </ul>
+  </div>
+</nav>

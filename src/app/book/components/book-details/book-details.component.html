@@ -1,0 +1,38 @@
+<nav>
+  <a routerLink="..">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z"
+            fill="currentColor" />
+    </svg>&nbsp;Back to results</a>
+</nav>
+<form [formGroup]="bookForm" (ngSubmit)="save()">
+  <div class="form-group row">
+    <label for="author" class="col-sm-2 col-form-label col-form-label-lg">Author</label>
+    <div class="col-sm-10">
+      <ba-with-form-errors>
+        <input formControlName="author" class="form-control form-control-lg" id="author">
+      </ba-with-form-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label col-form-label-lg">Title</label>
+    <div class="col-sm-10">
+      <ba-with-form-errors>
+        <input formControlName="title" class="form-control form-control-lg" id="title">
+      </ba-with-form-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="isbn" class="col-sm-2 col-form-label col-form-label-lg">ISBN</label>
+    <div class="col-sm-10">
+      <ba-with-form-errors>
+        <input formControlName="isbn" class="form-control form-control-lg" id="isbn">
+      </ba-with-form-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="bookForm.invalid">Save</button>
+    </div>
+  </div>
+</form>

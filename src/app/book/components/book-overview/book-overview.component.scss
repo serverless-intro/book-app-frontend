@@ -1,0 +1,36 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+input {
+  margin: 1rem 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  li {
+    width: 100%;
+
+    ba-book-card {
+      width: 100%;
+    }
+  }
+}
+
+
+@include media-breakpoint-up(lg) {
+  ul {
+    li {
+      width: inherit;
+      ba-book-card {
+        width: 25rem;
+      }
+    }
+  }
+}
