@@ -35,6 +35,8 @@ jobs:
       - run:
           name: Building
           command: npm run build:ci
+      - store_artifacts:
+          path: ./dist/book-app
       - persist_to_workspace:
           root: .
           paths:
@@ -72,7 +74,7 @@ jobs:
           at: .
       - run:
           name: Deploying to AWS using Serverless CLI
-          command: npx serverless deploy
+          command: npx serverless deploy --org marekmatczak79
 
 workflows:
   version: 2
