@@ -35,6 +35,10 @@ jobs:
       - run:
           name: Building
           command: npm run build:ci
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./dist/book-app
 
   test:
     docker:
@@ -45,31 +49,44 @@ jobs:
           name: Running tests
           command: npm run test:ci
       - store_artifacts:
-         path: ./coverage
-#      - persist_to_workspace:
-#          root: .
-#          paths:
-#            - ./coverage
+          path: ./coverage
+  #      - persist_to_workspace:
+  #          root: .
+  #          paths:
+  #            - ./coverage
 
-#  upload_coverage_to_coveralls:
-#    docker:
-#      - image: circleci/node:lts
-#    steps:
-#      - attach_workspace:
-#         at: .
-#      - coveralls/upload
+  #  upload_coverage_to_coveralls:
+  #    docker:
+  #      - image: circleci/node:lts
+  #    steps:
+  #      - attach_workspace:
+  #         at: .
+  #      - coveralls/upload
+
+  deploy:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploying to AWS using Serverless CLI
+          command: npx serverless deploy
 
 workflows:
   version: 2
-  lint_test_build:
+  lint_test_build_deploy:
     jobs:
       - lint
       - test:
           requires:
             - lint
-#      - upload_coverage_to_coveralls:
-#          requires:
-#            - test
+      #      - upload_coverage_to_coveralls:
+      #          requires:
+      #            - test
       - build:
           requires:
             - test
+      - deploy:
+          requires:
+            - build

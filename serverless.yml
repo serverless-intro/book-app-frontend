@@ -1,0 +1,7 @@
+component: website
+name: book-app-frontend
+
+inputs:
+  src:
+    src: ./
+    dist: dist/book-app
