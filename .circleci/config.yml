@@ -1,0 +1,72 @@
+version: 2.1
+
+commands:
+  checkout_and_install:
+    steps:
+      - checkout
+      - restore_cache:
+          key: NodeModules-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Installing dependencies
+          command: npm install
+      - save_cache:
+          key: NodeModules-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout_and_install
+      - run:
+          name: Linting
+          command: npm run lint
+
+  build:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout_and_install
+      - run:
+          name: Building
+          command: npm run build:ci
+
+  test:
+    docker:
+      - image: circleci/node:lts-browsers
+    steps:
+      - checkout_and_install
+      - run:
+          name: Running tests
+          command: npm run test:ci
+      - store_artifacts:
+         path: ./coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./coverage
+
+  upload_coverage_to_coveralls:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+         at: .
+      - coveralls/upload
+
+workflows:
+  version: 2
+  lint_test_build:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+      - upload_coverage_to_coveralls:
+          requires:
+            - test
+      - build:
+          requires:
+            - test
