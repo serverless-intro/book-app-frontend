@@ -1,7 +1,7 @@
 component: website
 name: book-app-frontend
+stage: dev
 
 inputs:
-  src:
-    src: ./
-    dist: dist/book-app
+  region: eu-central-1
+  src: ./dist/book-app
