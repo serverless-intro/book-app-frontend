@@ -1,7 +1,7 @@
 version: 2.1
 
-#orbs:
-#  coveralls: coveralls/coveralls@1.0.6
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
 
 commands:
   checkout_and_install:
@@ -52,18 +52,18 @@ jobs:
           command: npm run test:ci
       - store_artifacts:
           path: ./coverage
-  #      - persist_to_workspace:
-  #          root: .
-  #          paths:
-  #            - ./coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./coverage
 
-  #  upload_coverage_to_coveralls:
-  #    docker:
-  #      - image: circleci/node:lts
-  #    steps:
-  #      - attach_workspace:
-  #         at: .
-  #      - coveralls/upload
+    upload_coverage_to_coveralls:
+      docker:
+        - image: circleci/node:lts
+      steps:
+        - attach_workspace:
+           at: .
+        - coveralls/upload
 
   deploy:
     docker:
@@ -84,9 +84,9 @@ workflows:
       - test:
           requires:
             - lint
-      #      - upload_coverage_to_coveralls:
-      #          requires:
-      #            - test
+      - upload_coverage_to_coveralls:
+          requires:
+            - test
       - build:
           requires:
             - test
