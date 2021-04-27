@@ -1,7 +1,7 @@
 version: 2.1
 
-#orbs:
-#  coveralls: coveralls/coveralls@1.0.6
+orbs:
+  coveralls: coveralls/coveralls@1.0.6
 
 commands:
   checkout_and_install:
@@ -31,10 +31,17 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
-      - checkout_and_install
+      - attach_workspace:
+          at: .
       - run:
           name: Building
           command: npm run build:ci
+      - store_artifacts:
+          path: ./dist/book-app
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
   test:
     docker:
@@ -45,19 +52,19 @@ jobs:
           name: Running tests
           command: npm run test:ci
       - store_artifacts:
-         path: ./coverage
-#      - persist_to_workspace:
-#          root: .
-#          paths:
-#            - ./coverage
+          path: ./coverage
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
-#  upload_coverage_to_coveralls:
-#    docker:
-#      - image: circleci/node:lts
-#    steps:
-#      - attach_workspace:
-#         at: .
-#      - coveralls/upload
+  upload_coverage_to_coveralls:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - coveralls/upload
 
 workflows:
   version: 2
@@ -67,9 +74,9 @@ workflows:
       - test:
           requires:
             - lint
-#      - upload_coverage_to_coveralls:
-#          requires:
-#            - test
       - build:
           requires:
             - test
+      - upload_coverage_to_coveralls:
+          requires:
+            - build
