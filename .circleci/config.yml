@@ -74,7 +74,7 @@ jobs:
           at: .
       - run:
           name: Deploying to AWS using Serverless CLI
-          command: npx serverless remove --org marekmatczak79
+          command: npx serverless deploy --org marekmatczak79
 
 workflows:
   version: 2
