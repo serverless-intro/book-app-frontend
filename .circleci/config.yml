@@ -57,13 +57,13 @@ jobs:
           paths:
             - ./coverage
 
-    upload_coverage_to_coveralls:
-      docker:
-        - image: circleci/node:lts
-      steps:
-        - attach_workspace:
-           at: .
-        - coveralls/upload
+  upload_coverage_to_coveralls:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - coveralls/upload
 
   deploy:
     docker:
