@@ -15,7 +15,7 @@ export class BookCardComponent {
     if (value) {
       this.book = value;
       if (this.book.isbn) {
-        this.coverImgSrc = `http://covers.openlibrary.org/b/isbn/${this.book.isbn}-M.jpg`;
+        this.coverImgSrc = `https://covers.openlibrary.org/b/isbn/${this.book.isbn}-M.jpg`;
       }
     }
   }
