@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { BookOverviewComponent } from './book/components/book-overview/book-overview.component';
 import { BookDetailsComponent } from './book/components/book-details/book-details.component';
 import { BookResolver } from './book/components/book-details/book.resolver';
+import { AuthGuard } from './shared/security/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { BookResolver } from './book/components/book-details/book.resolver';
       { path: '', redirectTo: '/books', pathMatch: 'full' },
       {
         path: 'books',
+        canActivate: [AuthGuard],
         children: [
           { path: '', component: BookOverviewComponent },
           { path: 'new', component: BookDetailsComponent },

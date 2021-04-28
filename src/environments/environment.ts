@@ -4,7 +4,19 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:3000',
+  backendUrl: 'https://wicsxdy2hb.execute-api.eu-central-1.amazonaws.com',
+  authConfig: {
+    userPoolId: 'eu-central-1_5QiuwGB1A',
+    userPoolWebClientId: '3e4f373o3vbglt3dmuobd20ov7',
+    oauth: {
+      region: 'eu-central-1',
+      domain: 'book-app-users.auth.eu-central-1.amazoncognito.com',
+      scope: ['email', 'openid', 'aws.cognito.signin.user.admin'],
+      redirectSignIn: 'http://localhost:4200/',
+      redirectSignOut: 'http://localhost:4200/',
+      responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
+    },
+  },
 };
 
 /*

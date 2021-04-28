@@ -3,11 +3,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from './shared/header/header.component';
+import { securityServiceProviderFor } from './shared/security/security.spec';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
+      providers: [securityServiceProviderFor('some.user@example.com')],
       declarations: [HeaderComponent, AppComponent],
     }).compileComponents();
   });
