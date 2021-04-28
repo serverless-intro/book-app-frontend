@@ -1,6 +1,6 @@
 component: website
 name: book-app-frontend
-stage: int-db
+stage: int-iam
 
 inputs:
   region: eu-central-1
