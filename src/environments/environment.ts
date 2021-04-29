@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'https://wicsxdy2hb.execute-api.eu-central-1.amazonaws.com',
+  backendUrl: 'https://hpvtfeul5f.execute-api.eu-central-1.amazonaws.com',
   authConfig: {
     userPoolId: 'eu-central-1_5QiuwGB1A',
     userPoolWebClientId: '3e4f373o3vbglt3dmuobd20ov7',
